@@ -4,10 +4,11 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const app = express();
 
-const PORT = process.env.MONGODB_URI
+const PORT = process.env.PORT
+const MONGODB_URI = process.env.MONGODB_URI
   
  
-mongoose.connect(PORT).then(()=>{console.log("connected with mongodb")}).catch((err)=>(console.log(err)));
+mongoose.connect(MONGODB_URI).then(()=>{console.log("connected with mongodb")}).catch((err)=>(console.log(err)));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.json())
 const productSchema = new mongoose.Schema({
@@ -70,4 +71,4 @@ app.delete("/api/product/:id", async (req , res)=>{
 
 
 
-app.listen(5000 , ()=>{console.log("server connected on 5000")})
+app.listen(PORT , ()=>{console.log("server connected on 5000")})
